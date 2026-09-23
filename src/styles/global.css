@@ -1,0 +1,40 @@
+:root {
+  --sky-top: #0e1830;
+  --sky-bottom: #24365c;
+  --frost: #bcd6ec;
+  --ember: #f2a45a;
+  --panel-border: #3a5378;
+  --ink: #eaf1fb;
+  --ink-dim: #9db2ce;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--sky-top), var(--sky-bottom) 65%, #35507e 100%);
+  font-family: 'Inter', sans-serif;
+  color: var(--ink);
+}
+
+#canvas-wrap {
+  position: fixed;
+  inset: 0;
+}
+
+#canvas-wrap canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}

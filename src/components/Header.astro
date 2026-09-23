@@ -1,0 +1,43 @@
+<div id="header">
+  <div id="title-block">
+    <h1>Winter Savings, Room by Room</h1>
+    <p>A cutaway of a home in winter. Tap a room — or the list below — to see how it can save energy.</p>
+  </div>
+</div>
+
+<style>
+  #header {
+    position: fixed;
+    top: calc(28px + env(safe-area-inset-top, 0px));
+    left: 28px;
+    right: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+    z-index: 5;
+  }
+  #title-block h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(22px, 3.4vw, 32px);
+    margin: 0;
+    letter-spacing: 0.2px;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+  }
+  #title-block p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    color: var(--frost);
+    max-width: 320px;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 640px) {
+    #header {
+      left: 14px;
+      right: 14px;
+      top: calc(18px + env(safe-area-inset-top, 0px));
+    }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import { ROOMS, roomColorHex } from '../data/rooms.js';
+---
+
+<div id="legend">
+  {ROOMS.map((room) => (
+    <button class="room-btn" data-id={room.id} style={`--dot: ${roomColorHex(room.color)}`}>
+      <span class="dot"></span>{room.label}
+    </button>
+  ))}
+</div>
+
+<style>
+  #legend {
+    position: fixed;
+    left: 28px;
+    bottom: calc(26px + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    z-index: 5;
+  }
+  .room-btn {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(16, 26, 46, 0.72);
+    border: 1px solid var(--panel-border);
+    color: var(--ink);
+    padding: 9px 14px 9px 10px;
+    border-radius: 999px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  .room-btn .dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--dot, var(--ember));
+    box-shadow: 0 0 8px var(--dot, var(--ember));
+    flex: none;
+  }
+  .room-btn:hover {
+    border-color: var(--frost);
+    transform: translateX(2px);
+  }
+  .room-btn.active {
+    background: rgba(232, 164, 90, 0.22);
+    border-color: var(--dot, var(--ember));
+    box-shadow: 0 0 16px -2px var(--dot, var(--ember));
+  }
+
+  @media (max-width: 640px) {
+    #legend {
+      left: 14px;
+    }
+  }
+</style>

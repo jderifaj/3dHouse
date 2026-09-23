@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LoadingScreen from '../components/LoadingScreen.astro';
+import Header from '../components/Header.astro';
+import Legend from '../components/Legend.astro';
+import ZoomHint from '../components/ZoomHint.astro';
+import RoomGlass from '../components/RoomGlass.astro';
+---
+
+<BaseLayout title="Winter Cutout House">
+  <LoadingScreen />
+  <div id="canvas-wrap"></div>
+
+  <Header />
+  <Legend />
+  <ZoomHint />
+  <RoomGlass />
+
+  <script src="../scripts/main.js"></script>
+</BaseLayout>

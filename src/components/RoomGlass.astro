@@ -1,0 +1,194 @@
+<div id="room-glass">
+  <button id="glass-close" aria-label="Close">✕</button>
+  <p class="eyebrow" id="glass-eyebrow">ROOM</p>
+  <h2 id="glass-title">Title</h2>
+  <p id="glass-body">Body</p>
+  <span class="stat" id="glass-stat"></span>
+  <div class="glass-special" id="glass-special">
+    <div class="glass-control">
+      <button class="glass-play" id="btn-thermo" aria-label="Play thermostat demo">▶</button>
+      <span>Watch the thermostat get turned down</span>
+    </div>
+    <div class="glass-control">
+      <button class="glass-play" id="btn-fan" aria-label="Play fan airflow demo">▶</button>
+      <span>See the fan reversed to recirculate warm air</span>
+    </div>
+  </div>
+  <div class="glass-ctas">
+    <button class="glass-cta" id="glass-prev">← Prev room</button>
+    <button class="glass-cta" id="glass-next">Next room →</button>
+  </div>
+</div>
+
+<style>
+  /*
+    A frosted pane of glass, fixed in the upper right of the viewport — a
+    stable info panel rather than one that tracks the room in 3D space.
+    Backdrop blur + a brighter, more opaque fill keep the dark navy text
+    readable over the busy scene behind it.
+  */
+  #room-glass {
+    position: fixed;
+    top: calc(28px + env(safe-area-inset-top, 0px));
+    right: 28px;
+    width: min(300px, calc(100vw - 56px));
+    padding: 52px 18px 16px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(224, 237, 255, 0.78));
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 10px;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: 0 8px 30px rgba(10, 20, 40, 0.28), inset 0 0 18px rgba(255, 255, 255, 0.35);
+    color: var(--sky-top);
+    opacity: 0;
+    transform: translateY(-8px) scale(0.97);
+    pointer-events: none;
+    transition: opacity 0.32s ease, transform 0.32s ease;
+    z-index: 8;
+    overflow: hidden;
+  }
+  #room-glass.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  @media (max-width: 640px) {
+    #room-glass {
+      right: 14px;
+      top: calc(18px + env(safe-area-inset-top, 0px));
+    }
+  }
+  #room-glass::before {
+    content: '';
+    position: absolute;
+    inset: -60% -20%;
+    background: linear-gradient(115deg, transparent 42%, rgba(255, 255, 255, 0.35) 50%, transparent 58%);
+    animation: glass-sheen 4.2s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes glass-sheen {
+    0% {
+      transform: translateX(-40%);
+    }
+    100% {
+      transform: translateX(40%);
+    }
+  }
+  #room-glass > * {
+    position: relative;
+    z-index: 1;
+  }
+  #room-glass .eyebrow {
+    font-size: 11px;
+    color: #33456b;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    margin: 0 0 6px;
+  }
+  #room-glass h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0 0 10px;
+    line-height: 1.2;
+    color: var(--sky-top);
+  }
+  #room-glass p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #1c2c4a;
+    margin: 0 0 6px;
+  }
+  #room-glass .stat {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--sky-top);
+    background: rgba(14, 24, 48, 0.1);
+    border: 1px solid rgba(14, 24, 48, 0.22);
+    padding: 6px 11px;
+    border-radius: 10px;
+  }
+  #glass-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid rgba(14, 24, 48, 0.3);
+    background: rgba(14, 24, 48, 0.08);
+    color: var(--sky-top);
+    font-size: 13px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  #glass-close:hover {
+    background: rgba(14, 24, 48, 0.16);
+  }
+
+  .glass-ctas {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .glass-cta {
+    flex: 1;
+    background: rgba(14, 24, 48, 0.08);
+    border: 1px solid rgba(14, 24, 48, 0.25);
+    color: var(--sky-top);
+    padding: 8px 8px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+  .glass-cta:hover {
+    background: rgba(14, 24, 48, 0.16);
+  }
+
+  .glass-special {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(14, 24, 48, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .glass-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .glass-control span {
+    font-size: 12.5px;
+    color: #1c2c4a;
+    line-height: 1.35;
+  }
+  .glass-play {
+    flex: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(14, 24, 48, 0.3);
+    background: rgba(14, 24, 48, 0.08);
+    color: var(--sky-top);
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .glass-play:hover {
+    background: rgba(14, 24, 48, 0.16);
+    transform: scale(1.06);
+  }
+</style>
