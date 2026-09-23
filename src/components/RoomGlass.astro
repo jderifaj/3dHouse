@@ -29,8 +29,7 @@
   */
   #room-glass {
     position: fixed;
-    top: -5px;
-    left: 0;
+    top: calc(28px + env(safe-area-inset-top, 0px));
     right: 28px;
     width: min(300px, calc(100vw - 56px));
     padding: 1rem;
@@ -114,8 +113,8 @@
   }
   #glass-close {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: -5px;
+    left: 0;
     width: 24px;
     height: 24px;
     border-radius: 50%;
